@@ -1,13 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import Great from './component/Great';
+import { useSelector,useDispatch } from 'react-redux';
+import { incNumber,decNumber } from './actions';
 
-function App() {
+const App = () => {
+  const myState = useSelector((state) => state.changeTheNumber)
+  const dispatch = useDispatch();
   return (
-    <div className="App">
-      <Great/>
-    </div>
-  );
-}
+    <>
+    <div className="Container">
+      <h1>Increment / Decrement counter</h1>
+      <h4>Using React and redux</h4>
 
+      <div className='quantity'>
+        <a className='quantity_minus' title="Decrement" onClick={() => dispatch(decNumber(2))}><span>-</span></a>
+        <input name="quantity" type="text" className='quantity_input' value={myState}/>
+        <a className='quantity_plus' title="Increment" onClick={() => dispatch(incNumber(5)) }><span>+</span></a>
+      </div>
+    </div>
+    </>
+  )
+}
 export default App;
